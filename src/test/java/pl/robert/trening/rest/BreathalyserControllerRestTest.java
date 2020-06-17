@@ -1,6 +1,7 @@
 package pl.robert.trening.rest;
 
 import com.google.gson.Gson;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -23,29 +24,47 @@ class BreathalyserControllerRestTest {
 
     @Autowired
     private MockMvc mockMvc;
-
     @Test
-    public void whenCanIDriveDrink1l2p2h() throws Exception {
+    public void whenCanIDriveNoDrinkInTimeStartAndAfterStop() throws Exception {
         // Given
         TreeMap<Integer, Integer> drinkingHistory = new TreeMap<>();
-        drinkingHistory.put(1, 10);
-        drinkingHistory.put(2, 10);
+        drinkingHistory.put(0, 1);
+        drinkingHistory.put(25, 1);
         // When
-        int iCanDrive = callEndpoint(drinkingHistory);
+        Gson gson = new Gson();
+        String jsonString = gson.toJson(drinkingHistory);
         // Then
-        assertEquals(21, iCanDrive, "1l2p2h");
+        mockMvc.perform(post("/whenICanDrive")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(jsonString)
+            .accept(APPLICATION_JSON))
+            .andDo(print())
+            .andExpect(status().isNotAcceptable())
+            .andReturn()
+            .getResponse();
     }
 
+    @Disabled
     @Test
-    public void whenCanIDriveNoDrink() throws Exception {
+    public void whenCanIDriveNoDrink4() throws Exception {
         // Given
         TreeMap<Integer, Integer> drinkingHistory = new TreeMap<>();
+        drinkingHistory.put(25, 1);
         // When
-        int iCanDrive = callEndpoint(drinkingHistory);
+        Gson gson = new Gson();
+        String jsonString = gson.toJson(drinkingHistory);
         // Then
-        assertEquals(0, iCanDrive, "Wypiłem tylko cocacole");
+        mockMvc.perform(post("/whenICanDrive")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(jsonString)
+            .accept(APPLICATION_JSON))
+            .andDo(print())
+            .andExpect(status().isNotAcceptable())
+            .andReturn()
+            .getResponse();
     }
 
+    @Disabled
     @Test
     public void whenCanIDriveNoDrink2() throws Exception {
         // Given
@@ -57,13 +76,37 @@ class BreathalyserControllerRestTest {
         String jsonString = gson.toJson(drinkingHistory);
         // Then
         mockMvc.perform(post("/whenICanDrive")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(jsonString)
-                .accept(APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isNotAcceptable())
-                .andReturn()
-                .getResponse();
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(jsonString)
+            .accept(APPLICATION_JSON))
+            .andDo(print())
+            .andExpect(status().isNotAcceptable())
+            .andReturn()
+            .getResponse();
+    }
+
+    @Disabled
+    @Test
+    public void whenCanIDriveNoDrink() throws Exception {
+        // Given
+        TreeMap<Integer, Integer> drinkingHistory = new TreeMap<>();
+        // When
+        int iCanDrive = callEndpoint(drinkingHistory);
+        // Then
+        assertEquals(0, iCanDrive, "Wypiłem tylko cocacole");
+    }
+
+    @Disabled
+    @Test
+    public void whenCanIDriveDrink1l2p2h() throws Exception {
+        // Given
+        TreeMap<Integer, Integer> drinkingHistory = new TreeMap<>();
+        drinkingHistory.put(1, 10);
+        drinkingHistory.put(2, 10);
+        // When
+        int iCanDrive = callEndpoint(drinkingHistory);
+        // Then
+        assertEquals(21, iCanDrive, "1l2p2h");
     }
 
     private int callEndpoint(TreeMap<Integer, Integer> drinkingHistory) throws Exception {
