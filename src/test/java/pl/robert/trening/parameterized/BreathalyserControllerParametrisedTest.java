@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.TreeMap;
 import java.util.stream.Stream;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -12,6 +13,7 @@ import pl.robert.trening.breathalyser.CalculateAlcoholImpl;
 
 public class BreathalyserControllerParametrisedTest {
 
+  @Disabled
   @ParameterizedTest
   @MethodSource("createTreeMaps")
   void whenCanIDriveDrink1l2p2h(TreeMap<Integer, Integer> drinkingHistory, int hour) {

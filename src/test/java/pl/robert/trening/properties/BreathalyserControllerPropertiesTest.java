@@ -1,5 +1,6 @@
 package pl.robert.trening.properties;
 
+import net.jqwik.api.Disabled;
 import pl.robert.trening.breathalyser.CalculateAlcohol;
 import net.jqwik.api.Example;
 import net.jqwik.api.ForAll;
@@ -13,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BreathalyserControllerPropertiesTest {
 
+    @Disabled
     @Example
     void simpleTest() {
         // Given
@@ -25,6 +27,7 @@ class BreathalyserControllerPropertiesTest {
         assertEquals(12, calculateAlcohol.whenCanIDrive(), "ćwiarteczka");
     }
 
+    @Disabled
     @Property
     void simplePositiveProperties(@ForAll @IntRange(min = 1, max = 24) int key,
                                   @ForAll @IntRange(min = 1, max = 20) int value) {

@@ -1,15 +1,17 @@
 package pl.robert.trening.unit;
 
-import pl.robert.trening.breathalyser.CalculateAlcohol;
-import pl.robert.trening.breathalyser.CalculateAlcoholImpl;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.TreeMap;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import pl.robert.trening.breathalyser.CalculateAlcohol;
+import pl.robert.trening.breathalyser.CalculateAlcoholImpl;
 
 class BreathalyserControllerUnitTest {
 
+    @Disabled
     @Test
     void whenCanIDriveNoDrink() {
         // Given
@@ -19,6 +21,7 @@ class BreathalyserControllerUnitTest {
         assertEquals(0, calculateAlcohol.whenCanIDrive(), "NoDrink");
     }
 
+    @Disabled
     @Test
     void whenCanIDriveDrink1l2p2h() {
         // Given
@@ -30,5 +33,15 @@ class BreathalyserControllerUnitTest {
         calculateAlcohol.drink(drinkingHistory);
         // Then
         assertEquals(21, calculateAlcohol.whenCanIDrive(), "1l2p2h");
+    }
+
+    @Disabled
+    @Test
+    void whenCanIDriveNoDrinkSimple() {
+        // Given
+        CalculateAlcohol calculateAlcohol = new CalculateAlcoholImpl();
+        // When
+        // Then
+        assertTrue (true);
     }
 }
